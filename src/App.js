@@ -1,45 +1,50 @@
-import logo from './logo.svg';
 import './App.css';
 import { Component } from 'react';
 
 class App extends Component {
-    state = {
-      name: 'Berg',
-      counter: 0
-    };
+  state = {
+    posts: []
+  };
 
-  handleAClick = (event) =>{
-    event.preventDefault();
-    const{ counter } = this.state;
-    this.setState({counter: counter + 1})
+  componentDidMount() {
+    this.loadPosts();
   }
 
-  handlePClick = () => {
-    const { name } = this.state;
-    this.setState({name:'Gutto'});
+  loadPosts = async () => {
+    const postsResponse = fetch('https://jsonplaceholder.typicode.com/posts');
+
+    const photsResponse = fetch('https://jsonplaceholder.typicode.com/photos');
+
+    const [posts, photos] = await Promise.all([postsResponse, photsResponse]);
+
+    const postsJson = await posts.json();
+    const photosJson = await photos.json();
+
+    const postsAndPhotos = postsJson.map((post, index) => {
+      return { ...post, cover: photosJson[index].url }
+    });
+
+    this.setState({ posts: postsAndPhotos });
   }
-   
+
   render() {
-    const { name, counter } = this.state;
+    const { posts } = this.state;
 
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p onClick={this.handlePClick}>
-            {name} {counter}
-          </p>
-          <a
-            onClick={this.handleAClick}
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Gutemberg 
-          </a>
-        </header>
-      </div>
+      <section className="container">
+        <div className="posts">
+          {posts.map(post => (
+            <div className="post">
+              <img src={post.cover} alt={post.title} />
+              <div key={posts.id} className="post-content">
+                <h1>{post.title}</h1>
+                <p>{post.body}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
+
     );
   }
 }
