@@ -1,7 +1,7 @@
 import './styles.css';
 import { Component } from 'react';
 import { Posts } from '../../components/Posts';
-import { loadPosts } from '../../Utils/load-posts';
+import { loadPosts } from '../../utils/load-posts';
 
 
 export class Home extends Component {
