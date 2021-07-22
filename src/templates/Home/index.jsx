@@ -76,7 +76,7 @@ export class Home extends Component {
         )}
 
         {filteredPosts.length === 0 && (
-          <p>Não há posts realcionados com a sua pesquisa.</p>
+          <p>No posts related to your search.</p>
         )}
 
         <div className="button-container">
