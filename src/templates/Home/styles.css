@@ -13,6 +13,14 @@
   justify-content: center;
 }
 
+.header{
+  margin-bottom: 30px;
+}
+
+.header h1{
+  margin-bottom: 30px;
+}
+
 @media (max-width: 1368px){
   .container {
     max-width: 1000px;
