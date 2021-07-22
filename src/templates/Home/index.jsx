@@ -1,7 +1,7 @@
 import './styles.css';
 import { Component } from 'react';
 import { Posts } from '../../components/Posts';
-import { loadPosts } from '../../utils/load-posts';
+import { loadPosts } from '../../Utils/load-posts';
 import { Button } from '../../components/Button';
 import { TextInput } from '../../components/TextInput';
 
